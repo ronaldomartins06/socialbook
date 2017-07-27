@@ -3,14 +3,34 @@ package com.ronaldo.socialbook.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@Entity
 public class Book {
 
+	@JsonInclude(Include.NON_NULL)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@JsonInclude(Include.NON_NULL)
 	private String name;
+	@JsonInclude(Include.NON_NULL)
 	private String publisher;
+	@JsonInclude(Include.NON_NULL)
 	private String author;
+	@JsonInclude(Include.NON_NULL)
 	private String summary;
+	@JsonInclude(Include.NON_NULL)
 	private Date realese;
+	@JsonInclude(Include.NON_NULL)
+	@Transient
 	private List<Description> description;
 	
 	public Book(){}
