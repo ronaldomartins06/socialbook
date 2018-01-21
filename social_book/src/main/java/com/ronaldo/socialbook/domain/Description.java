@@ -9,8 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 public class Description {
@@ -18,8 +24,14 @@ public class Description {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long   id;
+	
+	@NotEmpty(message="Field is mandatory")
+	@Size(max =1500, message="Can not be more than 1500 characters.")
 	private String text;
+	@JsonInclude(Include.NON_NULL)
 	private String user;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date textDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
